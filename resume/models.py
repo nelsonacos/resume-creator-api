@@ -22,7 +22,6 @@ class ContactData(models.Model):
 
 class ProfileDescription(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='profile_description')
-    title = models.CharField(max_length=100)
     summary = models.TextField()
 
 class WorkExperience(models.Model):
