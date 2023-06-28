@@ -1,23 +1,23 @@
-# Usa la imagen base de Python 3.10
+# Use the Python 3.10 base image
 FROM python:3.10
 
-# Establece la variable de entorno PYTHONUNBUFFERED en 1
+# Set the PYTHONUNBUFFERED environment variable to 1
 ENV PYTHONUNBUFFERED=1
 
-# Directorio de trabajo dentro del contenedor
+# Working directory inside the container
 WORKDIR /app
 
-# Copia el archivo requirements.txt al directorio de trabajo
+# Copy the requirements.txt file to the working directory
 COPY requirements.txt .
 
-# Instala las dependencias del proyecto
+# Install project dependencies
 RUN pip install -r requirements.txt
 
-# Copia el resto del código del proyecto al directorio de trabajo
+# Copy the rest of the project code to the working directory
 COPY . .
 
-# Expone el puerto 8000 (o el puerto que utilices en tu proyecto Django)
+# Expose port 8000 
 EXPOSE 8000
 
-# Comando para ejecutar el servidor Django
+# Run the Django server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
