@@ -2,5 +2,6 @@ pip-tools
 Django
 django-cors-headers
 djangorestframework
+coverage
 coreapi
 Pillow
