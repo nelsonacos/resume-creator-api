@@ -1,3 +1,4 @@
+pip-tools
 Django
 django-cors-headers
 djangorestframework
