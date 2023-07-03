@@ -132,7 +132,7 @@ Open http://localhost:8000/resume/api/v1/ with your browser to see the result.
 10. Install the dependencies
 
     ```sh
-    pip install -r requirements.txt
+    pip install -r requirements.txt requirements-dev.txt
     ```
 11. Apply the database migrations
 
