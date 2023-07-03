@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Profile, PersonalData, ContactData, ProfileDescription, WorkExperience, EducationInformation, Language
+from .models import (
+    Profile,
+    PersonalData,
+    ContactData,
+    ProfileDescription,
+    WorkExperience,
+    EducationInformation,
+    Language,
+)
 
 admin.site.register(Profile)
 admin.site.register(PersonalData)

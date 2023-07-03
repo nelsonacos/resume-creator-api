@@ -1,47 +1,74 @@
 from rest_framework import serializers
-from .models import Profile, PersonalData, ContactData, ProfileDescription, WorkExperience, EducationInformation, Language
+from .models import (
+    Profile,
+    PersonalData,
+    ContactData,
+    ProfileDescription,
+    WorkExperience,
+    EducationInformation,
+    Language,
+)
+
 
 class LanguageSerializer(serializers.ModelSerializer):
-    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all(), write_only=True)
+    profile = serializers.PrimaryKeyRelatedField(
+        queryset=Profile.objects.all(), write_only=True
+    )
 
     class Meta:
         model = Language
-        exclude = ['id']
+        exclude = ["id"]
+
 
 class EducationInformationSerializer(serializers.ModelSerializer):
-    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all(), write_only=True)
+    profile = serializers.PrimaryKeyRelatedField(
+        queryset=Profile.objects.all(), write_only=True
+    )
 
     class Meta:
         model = EducationInformation
-        exclude = ['id']
+        exclude = ["id"]
+
 
 class WorkExperienceSerializer(serializers.ModelSerializer):
-    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all(), write_only=True)
+    profile = serializers.PrimaryKeyRelatedField(
+        queryset=Profile.objects.all(), write_only=True
+    )
 
     class Meta:
         model = WorkExperience
-        exclude = ['id']
+        exclude = ["id"]
+
 
 class ProfileDescriptionSerializer(serializers.ModelSerializer):
-    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all(), write_only=True)
+    profile = serializers.PrimaryKeyRelatedField(
+        queryset=Profile.objects.all(), write_only=True
+    )
 
     class Meta:
         model = ProfileDescription
-        exclude = ['id']
+        exclude = ["id"]
+
 
 class ContactDataSerializer(serializers.ModelSerializer):
-    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all(), write_only=True)
+    profile = serializers.PrimaryKeyRelatedField(
+        queryset=Profile.objects.all(), write_only=True
+    )
 
     class Meta:
         model = ContactData
-        exclude = ['id']
+        exclude = ["id"]
+
 
 class PersonalDataSerializer(serializers.ModelSerializer):
-    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all(), write_only=True)
+    profile = serializers.PrimaryKeyRelatedField(
+        queryset=Profile.objects.all(), write_only=True
+    )
 
     class Meta:
         model = PersonalData
-        exclude = ['id']
+        exclude = ["id"]
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     personal_data = PersonalDataSerializer(required=False)
@@ -53,4 +80,4 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = "__all__"

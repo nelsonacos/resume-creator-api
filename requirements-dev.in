@@ -3,3 +3,5 @@ pytest
 pytest-cov
 pytest-django
 pytest-sugar
+flake8
+black
