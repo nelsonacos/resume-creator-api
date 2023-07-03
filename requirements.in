@@ -2,6 +2,9 @@ pip-tools
 Django
 django-cors-headers
 djangorestframework
-coverage
+pytest
+pytest-cov
+pytest-django
+pytest-sugar
 coreapi
 Pillow

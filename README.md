@@ -142,7 +142,7 @@ Open http://localhost:8000/resume/api/v1/ with your browser to see the result.
 12. Running Tests
 
     ```sh
-    python manage.py test
+    pytest
     ```
 
 13. Start the project
