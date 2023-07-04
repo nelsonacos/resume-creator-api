@@ -3,5 +3,6 @@ pytest
 pytest-cov
 pytest-django
 pytest-sugar
+pre-commit
 flake8
 black
