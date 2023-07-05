@@ -1,0 +1,2 @@
+*.py linguist-language=Python
+staticfiles/** linguist-vendored
