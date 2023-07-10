@@ -1,0 +1,12 @@
+exclude_dirs:
+  - tests
+  - venv
+tests:
+  - B201
+  - B301
+  - B102
+  - B303
+  - B405
+skips:
+  - B101
+  - B601

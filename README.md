@@ -139,10 +139,10 @@ Open http://localhost:8000/resume/api/v1/ with your browser to see the result.
     ```sh
     python manage.py migrate
     ```
-12. Running Tests
+12. Install the git hook scripts
 
     ```sh
-    pytest
+    pre-commit install
     ```
 
 13. Start the project
