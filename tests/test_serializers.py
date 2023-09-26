@@ -13,7 +13,7 @@ from resume.serializers import (
 
 class LanguageSerializerTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
 
     def test_language_serializer_valid_data(self):
         language_data = {
@@ -54,7 +54,7 @@ class LanguageSerializerTestCase(TestCase):
 
 class EducationInformationSerializerTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="John Doe", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
 
     def test_education_information_serializer_valid_data(self):
         education_data = {
@@ -90,7 +90,7 @@ class EducationInformationSerializerTestCase(TestCase):
 
 class WorkExperienceSerializerTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
 
     def test_work_experience_serializer_valid_data(self):
         work_experience_data = {
@@ -128,7 +128,7 @@ class WorkExperienceSerializerTestCase(TestCase):
 
 class ProfileDescriptionSerializerTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
 
     def test_profile_description_serializer_valid_data(self):
         profile_description_data = {
@@ -156,7 +156,7 @@ class ProfileDescriptionSerializerTestCase(TestCase):
 
 class ContactDataSerializerTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
 
     def test_contact_data_serializer_valid_data(self):
         contact_data = {
@@ -196,7 +196,7 @@ class ContactDataSerializerTestCase(TestCase):
 
 class PersonalDataSerializerTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
 
     def test_personal_data_serializer_valid_data(self):
         personal_data = {
@@ -234,7 +234,7 @@ class PersonalDataSerializerTestCase(TestCase):
 
 class ProfileSerializerTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
 
     def test_profile_serializer_with_nested_serializers(self):
         personal_data = {
@@ -300,7 +300,6 @@ class ProfileSerializerTestCase(TestCase):
             },
         ]
         profile_data = {
-            "name": "Nelson Acosta",
             "title": "Developer",
             "personal_data": personal_data,
             "contact_data": contact_data,

@@ -35,7 +35,7 @@ class ProfileModelTestCase(TestCase):
 
 class PersonalDataModelTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
         self.personal_data_data = {
             "profile": self.profile,
             "first_name": "Nelson",
@@ -66,7 +66,7 @@ class PersonalDataModelTestCase(TestCase):
 
 class ContactDataModelTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
         self.contact_data_data = {
             "profile": self.profile,
             "phone_number": "1234567890",
@@ -103,7 +103,7 @@ class ContactDataModelTestCase(TestCase):
 
 class ProfileDescriptionModelTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
         self.profile_description_data = {
             "profile": self.profile,
             "summary": "Experienced developer with a passion for coding.",
@@ -135,7 +135,7 @@ class ProfileDescriptionModelTestCase(TestCase):
 
 class WorkExperienceModelTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
         self.work_experience_data = {
             "profile": self.profile,
             "company": "ABC Company",
@@ -179,7 +179,7 @@ class WorkExperienceModelTestCase(TestCase):
 
 class EducationInformationModelTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
         self.education_data = {
             "profile": self.profile,
             "degree": "Bachelor of Science",
@@ -214,7 +214,7 @@ class EducationInformationModelTestCase(TestCase):
 
 class LanguageModelTestCase(TestCase):
     def setUp(self):
-        self.profile = Profile.objects.create(name="Nelson Acosta", title="Developer")
+        self.profile = Profile.objects.create(title="Developer")
         self.language_data = {
             "profile": self.profile,
             "name": "Spanish",

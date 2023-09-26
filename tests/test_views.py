@@ -22,7 +22,7 @@ from resume.serializers import (
 class ViewTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.profile = Profile.objects.create(name="Profile 1", title="Title 1")
+        cls.profile = Profile.objects.create(title="Title 1")
 
     def setUp(self):
         ProfileDescription.objects.all().delete()
@@ -446,12 +446,11 @@ class ViewTests(TestCase):
         self.assertEqual(get_response.data, serializer.data)
 
         # Update existing profile data: It should return HTTP_200_OK
-        update_data = {"name": "Nelson Acosta", "title": "Web Developer"}
+        update_data = {"title": "Web Developer"}
         update_url = reverse("profile-detail", args=[self.profile.id])
         update_response = client.put(update_url, update_data, format="json")
 
         self.assertEqual(update_response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Profile.objects.get().name, "Nelson Acosta")
         self.assertEqual(Profile.objects.get().title, "Web Developer")
 
         # Delete profile data: It should return HTTP_204_NO_CONTENT
@@ -462,18 +461,25 @@ class ViewTests(TestCase):
         self.assertEqual(Profile.objects.count(), 0)
 
         # Test with incomplete data: It should return HTTP_400_BAD_REQUEST
-        data = {"name": "Nelson Acosta"}
-        response = client.post(url, data, format="json")
+        incomplete_data = {}
+        response = client.post(url, incomplete_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("title", response.data)
 
         # Test with invalid data: It should return HTTP_400_BAD_REQUEST
-        data = {"name": "", "title": "Software Engineer"}
-        response = client.post(url, data, format="json")
+        invalid_data = {"name": ""}
+        response = client.post(url, invalid_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("name", response.data)
+        self.assertIn("title", response.data)
+
+        # TEST Get non-existent data: It should return HTTP_404_NOT_FOUND
+        non_existent_url = reverse("profile-detail", args=[999])
+        non_existent_response = client.get(non_existent_url)
+
+        self.assertEqual(non_existent_response.status_code, status.HTTP_404_NOT_FOUND)
 
         # Get list of profiles: It should return HTTP_200_OK
         response = client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
         self.assertIsInstance(response.data, list)
