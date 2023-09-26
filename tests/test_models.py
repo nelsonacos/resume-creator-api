@@ -14,7 +14,6 @@ from resume.models import (
 class ProfileModelTestCase(TestCase):
     def setUp(self):
         self.profile_data = {
-            "name": "Nelson Acosta",
             "title": "Developer",
         }
 
@@ -22,7 +21,6 @@ class ProfileModelTestCase(TestCase):
         # Test creating a profile with values ​​for required fields
         profile = Profile.objects.create(**self.profile_data)
 
-        self.assertEqual(profile.name, "Nelson Acosta")
         self.assertEqual(profile.title, "Developer")
 
     def test_profile_creation_with_missing_required_fields(self):
