@@ -211,25 +211,21 @@ class PersonalDataSerializerTestCase(TestCase):
         serializer = PersonalDataSerializer(data=personal_data)
         self.assertTrue(serializer.is_valid())
 
-    def test_personal_data_serializer_missing_required_fields(self):
+    def test_personal_data_serializer_optional_fields(self):
         personal_data = {
             "profile": self.profile.id,
         }
         serializer = PersonalDataSerializer(data=personal_data)
-        self.assertFalse(serializer.is_valid())
-        self.assertIn("first_name", serializer.errors)
-        self.assertIn("last_name", serializer.errors)
-        self.assertIn("date_of_birth", serializer.errors)
-        self.assertIn("address", serializer.errors)
+        self.assertTrue(serializer.is_valid())
+        self.assertNotIn("first_name", serializer.errors)
+        self.assertNotIn("last_name", serializer.errors)
+        self.assertNotIn("date_of_birth", serializer.errors)
+        self.assertNotIn("address", serializer.errors)
 
     def test_personal_data_serializer_empty_data(self):
         personal_data = {}
         serializer = PersonalDataSerializer(data=personal_data)
         self.assertFalse(serializer.is_valid())
-        self.assertIn("first_name", serializer.errors)
-        self.assertIn("last_name", serializer.errors)
-        self.assertIn("date_of_birth", serializer.errors)
-        self.assertIn("address", serializer.errors)
 
 
 class ProfileSerializerTestCase(TestCase):

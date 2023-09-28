@@ -10,10 +10,10 @@ class PersonalData(models.Model):
     profile = models.OneToOneField(
         Profile, on_delete=models.CASCADE, related_name="personal_data"
     )
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField()
-    address = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
+    date_of_birth = models.DateField(blank=True, null=True)
+    address = models.CharField(max_length=200, blank=True)
 
 
 class ContactData(models.Model):
