@@ -170,28 +170,23 @@ class ContactDataSerializerTestCase(TestCase):
         serializer = ContactDataSerializer(data=contact_data)
         self.assertTrue(serializer.is_valid())
 
-    def test_contact_data_serializer_missing_required_fields(self):
+    def test_contact_data_serializer_optional_fields(self):
         contact_data = {
             "profile": self.profile.id,
         }
         serializer = ContactDataSerializer(data=contact_data)
-        self.assertFalse(serializer.is_valid())
-        self.assertIn("phone_number", serializer.errors)
-        self.assertIn("email", serializer.errors)
-        self.assertIn("website", serializer.errors)
-        self.assertIn("linkedin", serializer.errors)
-        self.assertIn("github", serializer.errors)
+        self.assertTrue(serializer.is_valid())
+        self.assertNotIn("phone_number", serializer.errors)
+        self.assertNotIn("email", serializer.errors)
+        self.assertNotIn("website", serializer.errors)
+        self.assertNotIn("linkedin", serializer.errors)
+        self.assertNotIn("github", serializer.errors)
 
     def test_contact_data_serializer_empty_data(self):
         contact_data = {}
         serializer = ContactDataSerializer(data=contact_data)
         self.assertFalse(serializer.is_valid())
         self.assertIn("profile", serializer.errors)
-        self.assertIn("phone_number", serializer.errors)
-        self.assertIn("email", serializer.errors)
-        self.assertIn("website", serializer.errors)
-        self.assertIn("linkedin", serializer.errors)
-        self.assertIn("github", serializer.errors)
 
 
 class PersonalDataSerializerTestCase(TestCase):

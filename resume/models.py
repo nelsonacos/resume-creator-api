@@ -20,11 +20,11 @@ class ContactData(models.Model):
     profile = models.OneToOneField(
         Profile, on_delete=models.CASCADE, related_name="contact_data"
     )
-    phone_number = models.CharField(max_length=20)
-    email = models.EmailField()
-    website = models.URLField()
-    linkedin = models.URLField()
-    github = models.URLField()
+    phone_number = models.CharField(max_length=20, blank=True)
+    email = models.EmailField(blank=True)
+    website = models.URLField(blank=True)
+    linkedin = models.URLField(blank=True)
+    github = models.URLField(blank=True)
 
 
 class ProfileDescription(models.Model):

@@ -89,16 +89,14 @@ class ContactDataModelTestCase(TestCase):
         )
         self.assertEqual(contact_data.github, "https://github.com/nelsonacos")
 
-    def test_contact_data_creation_with_missing_required_fields(self):
-        # Test creating a contact_data without providing values ​​for required fields
+    def test_contact_data_creation_with_only_required_fields(self):
+        # Test creating a contact_data with only the required field "profile"
         contact_data_data = {
             "profile": self.profile,
         }
-
         contact_data = ContactData(**contact_data_data)
-
-        with self.assertRaises(ValidationError):
-            contact_data.full_clean()
+        # This should not raise a ValidationError, as only the "profile" field is required
+        contact_data.full_clean()
 
 
 class ProfileDescriptionModelTestCase(TestCase):
