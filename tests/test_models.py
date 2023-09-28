@@ -119,16 +119,15 @@ class ProfileDescriptionModelTestCase(TestCase):
             "Experienced developer with a passion for coding.",
         )
 
-    def test_profile_description_creation_with_missing_required_fields(self):
-        # Test creating a profile_description without providing values ​​for required fields
+    def test_profile_description_creation_with_only_required_fields(self):
+        # Test creating a profile_description with only the required field "profile"
         profile_description_data = {
             "profile": self.profile,
         }
 
         profile_description = ProfileDescription(**profile_description_data)
 
-        with self.assertRaises(ValidationError):
-            profile_description.full_clean()
+        profile_description.full_clean()
 
 
 class WorkExperienceModelTestCase(TestCase):

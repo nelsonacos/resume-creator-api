@@ -138,20 +138,19 @@ class ProfileDescriptionSerializerTestCase(TestCase):
         serializer = ProfileDescriptionSerializer(data=profile_description_data)
         self.assertTrue(serializer.is_valid())
 
-    def test_profile_description_serializer_missing_required_fields(self):
+    def test_profile_description_serializer_optional_fields(self):
         profile_description_data = {
             "profile": self.profile.id,
         }
         serializer = ProfileDescriptionSerializer(data=profile_description_data)
-        self.assertFalse(serializer.is_valid())
-        self.assertIn("summary", serializer.errors)
+        self.assertTrue(serializer.is_valid())
+        self.assertNotIn("summary", serializer.errors)
 
     def test_profile_description_serializer_empty_data(self):
         profile_description_data = {}
         serializer = ProfileDescriptionSerializer(data=profile_description_data)
         self.assertFalse(serializer.is_valid())
         self.assertIn("profile", serializer.errors)
-        self.assertIn("summary", serializer.errors)
 
 
 class ContactDataSerializerTestCase(TestCase):

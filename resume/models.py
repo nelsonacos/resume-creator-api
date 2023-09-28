@@ -31,7 +31,7 @@ class ProfileDescription(models.Model):
     profile = models.OneToOneField(
         Profile, on_delete=models.CASCADE, related_name="profile_description"
     )
-    summary = models.TextField()
+    summary = models.TextField(blank=True)
 
 
 class WorkExperience(models.Model):
