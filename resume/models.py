@@ -38,13 +38,13 @@ class WorkExperience(models.Model):
     profile = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="work_experiences"
     )
-    company = models.CharField(max_length=100)
-    company_description = models.CharField(max_length=100)
-    position = models.CharField(max_length=100)
-    start_date = models.DateField()
+    company = models.CharField(max_length=100, blank=True)
+    company_description = models.CharField(max_length=100, blank=True)
+    position = models.CharField(max_length=100, blank=True)
+    start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    description = models.TextField()
-    skills = models.TextField()
+    description = models.TextField(blank=True)
+    skills = models.TextField(blank=True)
 
 
 class EducationInformation(models.Model):

@@ -106,24 +106,21 @@ class WorkExperienceSerializerTestCase(TestCase):
         serializer = WorkExperienceSerializer(data=work_experience_data)
         self.assertTrue(serializer.is_valid())
 
-    def test_work_experience_serializer_missing_required_fields(self):
+    def test_work_experience_serializer_optional_fields(self):
         work_experience_data = {
             "profile": self.profile.id,
             "company": "ABC Company",
         }
         serializer = WorkExperienceSerializer(data=work_experience_data)
-        self.assertFalse(serializer.is_valid())
-        self.assertIn("position", serializer.errors)
-        self.assertIn("start_date", serializer.errors)
+        self.assertTrue(serializer.is_valid())
+        self.assertNotIn("position", serializer.errors)
+        self.assertNotIn("start_date", serializer.errors)
 
     def test_work_experience_serializer_empty_data(self):
         work_experience_data = {}
         serializer = WorkExperienceSerializer(data=work_experience_data)
         self.assertFalse(serializer.is_valid())
         self.assertIn("profile", serializer.errors)
-        self.assertIn("company", serializer.errors)
-        self.assertIn("position", serializer.errors)
-        self.assertIn("start_date", serializer.errors)
 
 
 class ProfileDescriptionSerializerTestCase(TestCase):

@@ -144,7 +144,7 @@ class WorkExperienceModelTestCase(TestCase):
         }
 
     def test_work_experience_creation(self):
-        # Test creating a work_experience with values ​​for required fields
+        # Test creating a work_experience with all values
         work_experience = WorkExperience.objects.create(**self.work_experience_data)
 
         self.assertEqual(work_experience.profile, self.profile)
@@ -162,16 +162,14 @@ class WorkExperienceModelTestCase(TestCase):
         )
         self.assertEqual(work_experience.skills, "Python, Django, SQL")
 
-    def test_work_experience_creation_with_missing_required_fields(self):
-        # Test creating a work_experience without providing values ​​for required fields
+    def test_work_experience_creation_with_only_required_fields(self):
+        # Test creating a work_experience with only the required field "profile"
         work_experience_data = {
             "profile": self.profile,
         }
 
         work_experience = WorkExperience(**work_experience_data)
-
-        with self.assertRaises(ValidationError):
-            work_experience.full_clean()
+        work_experience.full_clean()
 
 
 class EducationInformationModelTestCase(TestCase):
