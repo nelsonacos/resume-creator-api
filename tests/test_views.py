@@ -142,7 +142,6 @@ class ViewTests(TestCase):
 
         # Test with incomplete data: It should return HTTP_400_BAD_REQUEST
         data = {
-            "profile": self.profile.id,
             "degree": "PhD",
             "institution": "University C",
             "start_date": "2024-01-01",
@@ -150,12 +149,12 @@ class ViewTests(TestCase):
         }
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("description", response.data)
+        self.assertIn("profile", response.data)
 
         # Test with invalid data: It should return HTTP_400_BAD_REQUEST
         data = {
-            "profile": self.profile.id,
-            "degree": "",  # Invalid: Empty degree
+            "profile": "",  # Invalid
+            "degree": "",
             "institution": "University E",
             "start_date": "2025-01-01",
             "end_date": "2024-12-31",
@@ -163,7 +162,7 @@ class ViewTests(TestCase):
         }
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("degree", response.data)
+        self.assertIn("profile", response.data)
 
         # Get list of education information: It should return HTTP_200_OK
         response = client.get(url)

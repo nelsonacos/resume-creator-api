@@ -68,24 +68,25 @@ class EducationInformationSerializerTestCase(TestCase):
         serializer = EducationInformationSerializer(data=education_data)
         self.assertTrue(serializer.is_valid())
 
-    def test_education_information_serializer_missing_required_fields(self):
+    def test_education_information_serializer_optional_fields(self):
         education_data = {
+            "profile": self.profile.id,
             "degree": "Bachelor of Science",
             "institution": "University of Example",
         }
         serializer = EducationInformationSerializer(data=education_data)
-        self.assertFalse(serializer.is_valid())
-        self.assertIn("profile", serializer.errors)
-        self.assertIn("start_date", serializer.errors)
+        self.assertTrue(serializer.is_valid())
+        self.assertNotIn("profile", serializer.errors)
+        self.assertNotIn("start_date", serializer.errors)
 
     def test_education_information_serializer_empty_data(self):
         education_data = {}
         serializer = EducationInformationSerializer(data=education_data)
         self.assertFalse(serializer.is_valid())
         self.assertIn("profile", serializer.errors)
-        self.assertIn("degree", serializer.errors)
-        self.assertIn("institution", serializer.errors)
-        self.assertIn("start_date", serializer.errors)
+        self.assertNotIn("degree", serializer.errors)
+        self.assertNotIn("institution", serializer.errors)
+        self.assertNotIn("start_date", serializer.errors)
 
 
 class WorkExperienceSerializerTestCase(TestCase):

@@ -51,11 +51,11 @@ class EducationInformation(models.Model):
     profile = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="education_information"
     )
-    degree = models.CharField(max_length=100)
-    institution = models.CharField(max_length=100)
-    start_date = models.DateField()
+    degree = models.CharField(max_length=100, blank=True)
+    institution = models.CharField(max_length=100, blank=True)
+    start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
 
 class Language(models.Model):

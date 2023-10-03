@@ -195,16 +195,14 @@ class EducationInformationModelTestCase(TestCase):
         self.assertEqual(str(education_info.end_date), "2022-06-30")
         self.assertEqual(education_info.description, "Studied Computer Science")
 
-    def test_education_information_creation_with_missing_required_fields(self):
-        # Test creating a education_information without providing values ​​for required fields
+    def test_education_information_creation_with_only_required_fields(self):
+        # Test creating a education_information with only the required field "profile"
         education_information_data = {
             "profile": self.profile,
         }
 
         education_information = EducationInformation(**education_information_data)
-
-        with self.assertRaises(ValidationError):
-            education_information.full_clean()
+        education_information.full_clean()
 
 
 class LanguageModelTestCase(TestCase):
