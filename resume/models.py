@@ -71,5 +71,7 @@ class Language(models.Model):
     profile = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="languages"
     )
-    name = models.CharField(max_length=100)
-    proficiency = models.CharField(max_length=1, choices=PROFICIENCY_CHOICES)
+    name = models.CharField(max_length=100, blank=True)
+    proficiency = models.CharField(
+        max_length=1, blank=True, choices=PROFICIENCY_CHOICES
+    )

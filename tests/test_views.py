@@ -70,10 +70,10 @@ class ViewTests(TestCase):
         self.assertEqual(Language.objects.count(), 0)
 
         # TEST with incomplete data: It should return HTTP_400_BAD_REQUEST
-        data = {"profile": self.profile.id, "proficiency": "F"}
+        data = {"proficiency": "F"}
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("name", response.data)
+        self.assertIn("profile", response.data)
 
         # TEST with invalid data: It should return HTTP_400_BAD_REQUEST
         data = {"profile": self.profile.id, "name": "Spanish", "proficiency": "X"}

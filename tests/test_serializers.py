@@ -48,8 +48,8 @@ class LanguageSerializerTestCase(TestCase):
         serializer = LanguageSerializer(data=language_data)
         self.assertFalse(serializer.is_valid())
         self.assertIn("profile", serializer.errors)
-        self.assertIn("name", serializer.errors)
-        self.assertIn("proficiency", serializer.errors)
+        self.assertNotIn("name", serializer.errors)
+        self.assertNotIn("proficiency", serializer.errors)
 
 
 class EducationInformationSerializerTestCase(TestCase):
