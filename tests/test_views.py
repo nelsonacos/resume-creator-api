@@ -33,7 +33,7 @@ class ViewTests(TestCase):
     def test_language_viewset(self):
         client = APIClient()
         # Create new language data: It should return HTTP_201_CREATED
-        data = {"profile": self.profile.id, "name": "English", "proficiency": "F"}
+        data = {"profile_id": self.profile.id, "name": "English", "proficiency": "F"}
         url = reverse("language-list")
         response = client.post(url, data, format="json")
 
@@ -51,7 +51,7 @@ class ViewTests(TestCase):
 
         # Update existing contact data: It should return HTTP_200_OK
         update_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "name": "Spanish",
             "proficiency": "N",
         }
@@ -73,10 +73,10 @@ class ViewTests(TestCase):
         data = {"proficiency": "F"}
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("profile", response.data)
+        self.assertIn("profile_id", response.data)
 
         # TEST with invalid data: It should return HTTP_400_BAD_REQUEST
-        data = {"profile": self.profile.id, "name": "Spanish", "proficiency": "X"}
+        data = {"profile_id": self.profile.id, "name": "Spanish", "proficiency": "X"}
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("proficiency", response.data)
@@ -90,7 +90,7 @@ class ViewTests(TestCase):
         client = APIClient()
         # Create new education information data: It should return HTTP_201_CREATED
         data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "degree": "Master of Arts",
             "institution": "University B",
             "start_date": "2023-01-01",
@@ -117,7 +117,7 @@ class ViewTests(TestCase):
 
         # Update existing education information data: It should return HTTP_200_OK
         update_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "degree": "Bachelor of Engineering",
             "institution": "University D",
             "start_date": "2022-01-01",
@@ -149,11 +149,11 @@ class ViewTests(TestCase):
         }
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("profile", response.data)
+        self.assertIn("profile_id", response.data)
 
         # Test with invalid data: It should return HTTP_400_BAD_REQUEST
         data = {
-            "profile": "",  # Invalid
+            "profile_id": "",  # Invalid
             "degree": "",
             "institution": "University E",
             "start_date": "2025-01-01",
@@ -162,7 +162,7 @@ class ViewTests(TestCase):
         }
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("profile", response.data)
+        self.assertIn("profile_id", response.data)
 
         # Get list of education information: It should return HTTP_200_OK
         response = client.get(url)
@@ -173,7 +173,7 @@ class ViewTests(TestCase):
         client = APIClient()
         # Create new work experience data: It should return HTTP_201_CREATED
         data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "company": "Company A",
             "company_description": "Description A",
             "position": "Position A",
@@ -202,7 +202,7 @@ class ViewTests(TestCase):
 
         # Update existing work experience data: It should return HTTP_200_OK
         update_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "company": "Company B",
             "company_description": "Description B",
             "position": "Position B",
@@ -236,11 +236,11 @@ class ViewTests(TestCase):
         }
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("profile", response.data)
+        self.assertIn("profile_id", response.data)
 
         # Test with invalid data: It should return HTTP_400_BAD_REQUEST
         data = {
-            "profile": "",  # Invalid
+            "profile_id": "",  # Invalid
             "company": "",
             "company_description": "Description D",
             "position": "Position D",
@@ -251,7 +251,7 @@ class ViewTests(TestCase):
         }
         response = client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("profile", response.data)
+        self.assertIn("profile_id", response.data)
 
         # Get list of work experience: It should return HTTP_200_OK
         response = client.get(url)
@@ -261,7 +261,7 @@ class ViewTests(TestCase):
     def test_profile_description_viewset(self):
         client = APIClient()
         # Create new profile description: It should return HTTP_201_CREATED
-        data = {"profile": self.profile.id, "summary": "Test summary"}
+        data = {"profile_id": self.profile.id, "summary": "Test summary"}
         url = reverse("profiledescription-list")
         response = client.post(url, data, format="json")
 
@@ -278,7 +278,7 @@ class ViewTests(TestCase):
         self.assertEqual(get_response.data["summary"], "Test summary")
 
         # Update existing profile description: It should return HTTP_200_OK
-        update_data = {"profile": self.profile.id, "summary": "Updated summary"}
+        update_data = {"profile_id": self.profile.id, "summary": "Updated summary"}
         put_url = reverse("profiledescription-detail", args=[description.id])
         put_response = client.put(put_url, update_data, format="json")
 
@@ -308,7 +308,7 @@ class ViewTests(TestCase):
         client = APIClient()
         # Create new contact data: It should return HTTP_201_CREATED
         data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "phone_number": "123456789",
             "email": "nelson@example.com",
             "website": "https://example.com",
@@ -332,7 +332,7 @@ class ViewTests(TestCase):
 
         # Update existing contact data: It should return HTTP_200_OK
         update_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "phone_number": "987654321",
             "email": "nelson@example.com",
             "website": "https://updated.com",
@@ -372,7 +372,7 @@ class ViewTests(TestCase):
         client = APIClient()
         # Create new personal data: It should return HTTP_201_CREATED
         data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "first_name": "Nelson",
             "last_name": "Acosta",
             "date_of_birth": "1990-01-01",
@@ -396,7 +396,7 @@ class ViewTests(TestCase):
 
         # Update existing personal data: It should return HTTP_200_OK
         update_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "first_name": "Nelson",
             "last_name": "Acosta",
             "date_of_birth": "1995-01-01",

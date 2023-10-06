@@ -7,7 +7,7 @@ class Profile(models.Model):
 
 
 class PersonalData(models.Model):
-    profile = models.OneToOneField(
+    profile_id = models.OneToOneField(
         Profile, on_delete=models.CASCADE, related_name="personal_data"
     )
     first_name = models.CharField(max_length=100, blank=True)
@@ -17,7 +17,7 @@ class PersonalData(models.Model):
 
 
 class ContactData(models.Model):
-    profile = models.OneToOneField(
+    profile_id = models.OneToOneField(
         Profile, on_delete=models.CASCADE, related_name="contact_data"
     )
     phone_number = models.CharField(max_length=20, blank=True)
@@ -28,14 +28,14 @@ class ContactData(models.Model):
 
 
 class ProfileDescription(models.Model):
-    profile = models.OneToOneField(
+    profile_id = models.OneToOneField(
         Profile, on_delete=models.CASCADE, related_name="profile_description"
     )
     summary = models.TextField(blank=True)
 
 
 class WorkExperience(models.Model):
-    profile = models.ForeignKey(
+    profile_id = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="work_experiences"
     )
     company = models.CharField(max_length=100, blank=True)
@@ -48,7 +48,7 @@ class WorkExperience(models.Model):
 
 
 class EducationInformation(models.Model):
-    profile = models.ForeignKey(
+    profile_id = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="education_information"
     )
     degree = models.CharField(max_length=100, blank=True)
@@ -68,7 +68,7 @@ class Language(models.Model):
         ("F", "Fluente"),
     )
 
-    profile = models.ForeignKey(
+    profile_id = models.ForeignKey(
         Profile, on_delete=models.CASCADE, related_name="languages"
     )
     name = models.CharField(max_length=100, blank=True)

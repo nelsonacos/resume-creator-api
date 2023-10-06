@@ -17,7 +17,7 @@ class LanguageSerializerTestCase(TestCase):
 
     def test_language_serializer_valid_data(self):
         language_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "name": "English",
             "proficiency": "F",
         }
@@ -31,11 +31,11 @@ class LanguageSerializerTestCase(TestCase):
         }
         serializer = LanguageSerializer(data=language_data)
         self.assertFalse(serializer.is_valid())
-        self.assertIn("profile", serializer.errors)
+        self.assertIn("profile_id", serializer.errors)
 
     def test_language_serializer_invalid_proficiency(self):
         language_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "name": "English",
             "proficiency": "X",
         }
@@ -47,7 +47,7 @@ class LanguageSerializerTestCase(TestCase):
         language_data = {}
         serializer = LanguageSerializer(data=language_data)
         self.assertFalse(serializer.is_valid())
-        self.assertIn("profile", serializer.errors)
+        self.assertIn("profile_id", serializer.errors)
         self.assertNotIn("name", serializer.errors)
         self.assertNotIn("proficiency", serializer.errors)
 
@@ -58,7 +58,7 @@ class EducationInformationSerializerTestCase(TestCase):
 
     def test_education_information_serializer_valid_data(self):
         education_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "degree": "Bachelor of Science",
             "institution": "University of Example",
             "start_date": "2018-09-01",
@@ -70,20 +70,20 @@ class EducationInformationSerializerTestCase(TestCase):
 
     def test_education_information_serializer_optional_fields(self):
         education_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "degree": "Bachelor of Science",
             "institution": "University of Example",
         }
         serializer = EducationInformationSerializer(data=education_data)
         self.assertTrue(serializer.is_valid())
-        self.assertNotIn("profile", serializer.errors)
+        self.assertNotIn("profile_id", serializer.errors)
         self.assertNotIn("start_date", serializer.errors)
 
     def test_education_information_serializer_empty_data(self):
         education_data = {}
         serializer = EducationInformationSerializer(data=education_data)
         self.assertFalse(serializer.is_valid())
-        self.assertIn("profile", serializer.errors)
+        self.assertIn("profile_id", serializer.errors)
         self.assertNotIn("degree", serializer.errors)
         self.assertNotIn("institution", serializer.errors)
         self.assertNotIn("start_date", serializer.errors)
@@ -95,7 +95,7 @@ class WorkExperienceSerializerTestCase(TestCase):
 
     def test_work_experience_serializer_valid_data(self):
         work_experience_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "company": "ABC Company",
             "company_description": "A leading software development company",
             "position": "Senior Developer",
@@ -109,7 +109,7 @@ class WorkExperienceSerializerTestCase(TestCase):
 
     def test_work_experience_serializer_optional_fields(self):
         work_experience_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "company": "ABC Company",
         }
         serializer = WorkExperienceSerializer(data=work_experience_data)
@@ -121,7 +121,7 @@ class WorkExperienceSerializerTestCase(TestCase):
         work_experience_data = {}
         serializer = WorkExperienceSerializer(data=work_experience_data)
         self.assertFalse(serializer.is_valid())
-        self.assertIn("profile", serializer.errors)
+        self.assertIn("profile_id", serializer.errors)
 
 
 class ProfileDescriptionSerializerTestCase(TestCase):
@@ -130,7 +130,7 @@ class ProfileDescriptionSerializerTestCase(TestCase):
 
     def test_profile_description_serializer_valid_data(self):
         profile_description_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "summary": "Experienced developer with expertise in Python and Django",
         }
         serializer = ProfileDescriptionSerializer(data=profile_description_data)
@@ -138,7 +138,7 @@ class ProfileDescriptionSerializerTestCase(TestCase):
 
     def test_profile_description_serializer_optional_fields(self):
         profile_description_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
         }
         serializer = ProfileDescriptionSerializer(data=profile_description_data)
         self.assertTrue(serializer.is_valid())
@@ -148,7 +148,7 @@ class ProfileDescriptionSerializerTestCase(TestCase):
         profile_description_data = {}
         serializer = ProfileDescriptionSerializer(data=profile_description_data)
         self.assertFalse(serializer.is_valid())
-        self.assertIn("profile", serializer.errors)
+        self.assertIn("profile_id", serializer.errors)
 
 
 class ContactDataSerializerTestCase(TestCase):
@@ -157,7 +157,7 @@ class ContactDataSerializerTestCase(TestCase):
 
     def test_contact_data_serializer_valid_data(self):
         contact_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "phone_number": "1234567890",
             "email": "nelson@example.com",
             "website": "https://www.example.com",
@@ -169,7 +169,7 @@ class ContactDataSerializerTestCase(TestCase):
 
     def test_contact_data_serializer_optional_fields(self):
         contact_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
         }
         serializer = ContactDataSerializer(data=contact_data)
         self.assertTrue(serializer.is_valid())
@@ -183,7 +183,7 @@ class ContactDataSerializerTestCase(TestCase):
         contact_data = {}
         serializer = ContactDataSerializer(data=contact_data)
         self.assertFalse(serializer.is_valid())
-        self.assertIn("profile", serializer.errors)
+        self.assertIn("profile_id", serializer.errors)
 
 
 class PersonalDataSerializerTestCase(TestCase):
@@ -192,7 +192,7 @@ class PersonalDataSerializerTestCase(TestCase):
 
     def test_personal_data_serializer_valid_data(self):
         personal_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "first_name": "Nelson",
             "last_name": "Acosta",
             "date_of_birth": "1990-01-01",
@@ -205,7 +205,7 @@ class PersonalDataSerializerTestCase(TestCase):
 
     def test_personal_data_serializer_optional_fields(self):
         personal_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
         }
         serializer = PersonalDataSerializer(data=personal_data)
         self.assertTrue(serializer.is_valid())
@@ -226,14 +226,14 @@ class ProfileSerializerTestCase(TestCase):
 
     def test_profile_serializer_with_nested_serializers(self):
         personal_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "first_name": "John",
             "last_name": "Doe",
             "date_of_birth": "1990-01-01",
             "address": "123 Main St",
         }
         contact_data = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "phone_number": "1234567890",
             "email": "nelson.acosta@example.com",
             "website": "https://example.com",
@@ -241,12 +241,12 @@ class ProfileSerializerTestCase(TestCase):
             "github": "https://github.com/nelsonacos",
         }
         profile_description = {
-            "profile": self.profile.id,
+            "profile_id": self.profile.id,
             "summary": "Experienced developer with expertise in web development.",
         }
         work_experiences = [
             {
-                "profile": self.profile.id,
+                "profile_id": self.profile.id,
                 "company": "ABC Inc.",
                 "company_description": "Software development company",
                 "position": "Software Engineer",
@@ -256,7 +256,7 @@ class ProfileSerializerTestCase(TestCase):
                 "skills": "Python, Django, JavaScript",
             },
             {
-                "profile": self.profile.id,
+                "profile_id": self.profile.id,
                 "company": "XYZ Corp.",
                 "company_description": "Technology solutions provider",
                 "position": "Senior Developer",
@@ -267,7 +267,7 @@ class ProfileSerializerTestCase(TestCase):
         ]
         education_information = [
             {
-                "profile": self.profile.id,
+                "profile_id": self.profile.id,
                 "degree": "Bachelor of Science",
                 "institution": "University of Example",
                 "start_date": "2014-01-01",
@@ -277,12 +277,12 @@ class ProfileSerializerTestCase(TestCase):
         ]
         languages = [
             {
-                "profile": self.profile.id,
+                "profile_id": self.profile.id,
                 "name": "English",
                 "proficiency": "F",
             },
             {
-                "profile": self.profile.id,
+                "profile_id": self.profile.id,
                 "name": "Spanish",
                 "proficiency": "N",
             },

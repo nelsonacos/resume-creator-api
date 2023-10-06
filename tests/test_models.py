@@ -37,7 +37,7 @@ class PersonalDataModelTestCase(TestCase):
     def setUp(self):
         self.profile = Profile.objects.create(title="Developer")
         self.personal_data_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
             "first_name": "Nelson",
             "last_name": "Acosta",
             "date_of_birth": "1990-01-01",
@@ -48,7 +48,7 @@ class PersonalDataModelTestCase(TestCase):
         # Test creating a personal_data with values ​​for required fields
         personal_data = PersonalData.objects.create(**self.personal_data_data)
 
-        self.assertEqual(personal_data.profile, self.profile)
+        self.assertEqual(personal_data.profile_id, self.profile)
         self.assertEqual(personal_data.first_name, "Nelson")
         self.assertEqual(personal_data.last_name, "Acosta")
         self.assertEqual(str(personal_data.date_of_birth), "1990-01-01")
@@ -68,7 +68,7 @@ class ContactDataModelTestCase(TestCase):
     def setUp(self):
         self.profile = Profile.objects.create(title="Developer")
         self.contact_data_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
             "phone_number": "1234567890",
             "email": "nelson@example.com",
             "website": "http://example.com",
@@ -80,7 +80,7 @@ class ContactDataModelTestCase(TestCase):
         # Test creating a contact_data with values ​​for required fields
         contact_data = ContactData.objects.create(**self.contact_data_data)
 
-        self.assertEqual(contact_data.profile, self.profile)
+        self.assertEqual(contact_data.profile_id, self.profile)
         self.assertEqual(contact_data.phone_number, "1234567890")
         self.assertEqual(contact_data.email, "nelson@example.com")
         self.assertEqual(contact_data.website, "http://example.com")
@@ -92,7 +92,7 @@ class ContactDataModelTestCase(TestCase):
     def test_contact_data_creation_with_only_required_fields(self):
         # Test creating a contact_data with only the required field "profile"
         contact_data_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
         }
         contact_data = ContactData(**contact_data_data)
         # This should not raise a ValidationError, as only the "profile" field is required
@@ -103,7 +103,7 @@ class ProfileDescriptionModelTestCase(TestCase):
     def setUp(self):
         self.profile = Profile.objects.create(title="Developer")
         self.profile_description_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
             "summary": "Experienced developer with a passion for coding.",
         }
 
@@ -113,7 +113,7 @@ class ProfileDescriptionModelTestCase(TestCase):
             **self.profile_description_data
         )
 
-        self.assertEqual(profile_description.profile, self.profile)
+        self.assertEqual(profile_description.profile_id, self.profile)
         self.assertEqual(
             profile_description.summary,
             "Experienced developer with a passion for coding.",
@@ -122,7 +122,7 @@ class ProfileDescriptionModelTestCase(TestCase):
     def test_profile_description_creation_with_only_required_fields(self):
         # Test creating a profile_description with only the required field "profile"
         profile_description_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
         }
 
         profile_description = ProfileDescription(**profile_description_data)
@@ -134,7 +134,7 @@ class WorkExperienceModelTestCase(TestCase):
     def setUp(self):
         self.profile = Profile.objects.create(title="Developer")
         self.work_experience_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
             "company": "ABC Company",
             "company_description": "A leading software development company",
             "position": "Senior Developer",
@@ -147,7 +147,7 @@ class WorkExperienceModelTestCase(TestCase):
         # Test creating a work_experience with all values
         work_experience = WorkExperience.objects.create(**self.work_experience_data)
 
-        self.assertEqual(work_experience.profile, self.profile)
+        self.assertEqual(work_experience.profile_id, self.profile)
         self.assertEqual(work_experience.company, "ABC Company")
         self.assertEqual(
             work_experience.company_description,
@@ -165,7 +165,7 @@ class WorkExperienceModelTestCase(TestCase):
     def test_work_experience_creation_with_only_required_fields(self):
         # Test creating a work_experience with only the required field "profile"
         work_experience_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
         }
 
         work_experience = WorkExperience(**work_experience_data)
@@ -176,7 +176,7 @@ class EducationInformationModelTestCase(TestCase):
     def setUp(self):
         self.profile = Profile.objects.create(title="Developer")
         self.education_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
             "degree": "Bachelor of Science",
             "institution": "University of Example",
             "start_date": "2018-09-01",
@@ -188,7 +188,7 @@ class EducationInformationModelTestCase(TestCase):
         # Test creating a education_information with values ​​for required fields
         education_info = EducationInformation.objects.create(**self.education_data)
 
-        self.assertEqual(education_info.profile, self.profile)
+        self.assertEqual(education_info.profile_id, self.profile)
         self.assertEqual(education_info.degree, "Bachelor of Science")
         self.assertEqual(education_info.institution, "University of Example")
         self.assertEqual(str(education_info.start_date), "2018-09-01")
@@ -198,7 +198,7 @@ class EducationInformationModelTestCase(TestCase):
     def test_education_information_creation_with_only_required_fields(self):
         # Test creating a education_information with only the required field "profile"
         education_information_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
         }
 
         education_information = EducationInformation(**education_information_data)
@@ -209,7 +209,7 @@ class LanguageModelTestCase(TestCase):
     def setUp(self):
         self.profile = Profile.objects.create(title="Developer")
         self.language_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
             "name": "Spanish",
             "proficiency": "N",
         }
@@ -218,14 +218,14 @@ class LanguageModelTestCase(TestCase):
         # Test creating a language with values ​​for required fields
         language = Language.objects.create(**self.language_data)
 
-        self.assertEqual(language.profile, self.profile)
+        self.assertEqual(language.profile_id, self.profile)
         self.assertEqual(language.name, "Spanish")
         self.assertEqual(language.proficiency, "N")
 
     def test_language_creation_with_invalid_proficiency(self):
         # Test creating a language with an invalid proficiency value
         language_data = {
-            "profile": self.profile,
+            "profile_id": self.profile,
             "name": "Spanish",
             "proficiency": "X",
         }
