@@ -8,6 +8,7 @@ from resume.models import (
     Language,
     EducationInformation,
     WorkExperience,
+    Achievement,
     ProfileDescription,
     ContactData,
     PersonalData,
@@ -15,6 +16,7 @@ from resume.models import (
 from resume.serializers import (
     EducationInformationSerializer,
     WorkExperienceSerializer,
+    AchievementSerializer,
     ProfileSerializer,
 )
 
@@ -257,6 +259,104 @@ class ViewTests(TestCase):
         response = client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIsInstance(response.data, list)
+
+    def test_achievement_viewset_list(self):
+        client = APIClient()
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+        )
+        url = reverse("achievement-list")
+        response = client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIsInstance(response.data, list)
+
+    def test_achievement_viewset_create(self):
+        client = APIClient()
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+        )
+        data = {
+            "work_experience_id": self.work_experience.id,
+            "achievement_text": "Developed a new feature that improved performance by 10%",
+        }
+        url = reverse("achievement-list")
+        response = client.post(url, data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data["work_experience_id"], self.work_experience.id)
+        self.assertEqual(
+            response.data["achievement_text"],
+            "Developed a new feature that improved performance by 10%",
+        )
+
+    def test_achievement_viewset_retrieve(self):
+        client = APIClient()
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+        )
+        achievement = Achievement.objects.create(
+            work_experience_id=self.work_experience,
+            achievement_text="Developed a new feature that improved performance by 10%",
+        )
+        url = reverse("achievement-detail", args=[achievement.id])
+        response = client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        serializer = AchievementSerializer(achievement)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_achievement_viewset_update(self):
+        client = APIClient()
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+        )
+        achievement = Achievement.objects.create(
+            work_experience_id=self.work_experience,
+            achievement_text="Developed a new feature that improved performance by 10%",
+        )
+        update_data = {
+            "work_experience_id": self.work_experience.id,
+            "achievement_text": "Developed a new feature that improved performance by 20%",
+        }
+        url = reverse("achievement-detail", args=[achievement.id])
+        response = client.put(url, update_data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        achievement.refresh_from_db()
+        self.assertEqual(
+            achievement.achievement_text,
+            "Developed a new feature that improved performance by 20%",
+        )
+
+    def test_achievement_viewset_destroy(self):
+        client = APIClient()
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+        )
+        achievement = Achievement.objects.create(
+            work_experience_id=self.work_experience,
+            achievement_text="Developed a new feature that improved performance by 10%",
+        )
+        url = reverse("achievement-detail", args=[achievement.id])
+        response = client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Achievement.objects.count(), 0)
+
+    def test_achievement_viewset_create_with_invalid_data(self):
+        client = APIClient()
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+        )
+        data = {
+            "achievement_text": "This achievement is too long",
+        }
+        url = reverse("achievement-list")
+        response = client.post(url, data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("work_experience_id", response.data)
 
     def test_profile_description_viewset(self):
         client = APIClient()

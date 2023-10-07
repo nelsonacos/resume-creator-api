@@ -6,6 +6,7 @@ from resume.models import (
     ContactData,
     ProfileDescription,
     WorkExperience,
+    Achievement,
     EducationInformation,
     Language,
 )
@@ -139,7 +140,7 @@ class WorkExperienceModelTestCase(TestCase):
             "company_description": "A leading software development company",
             "position": "Senior Developer",
             "start_date": "2022-01-01",
-            "description": "Worked on various projects using Python and Django",
+            "responsibility": "Worked on various projects using Python and Django",
             "skills": "Python, Django, SQL",
         }
 
@@ -157,7 +158,7 @@ class WorkExperienceModelTestCase(TestCase):
         self.assertEqual(str(work_experience.start_date), "2022-01-01")
         self.assertIsNone(work_experience.end_date)
         self.assertEqual(
-            work_experience.description,
+            work_experience.responsibility,
             "Worked on various projects using Python and Django",
         )
         self.assertEqual(work_experience.skills, "Python, Django, SQL")
@@ -170,6 +171,52 @@ class WorkExperienceModelTestCase(TestCase):
 
         work_experience = WorkExperience(**work_experience_data)
         work_experience.full_clean()
+
+
+class AchievementModelTestCase(TestCase):
+    def setUp(self):
+        self.profile = Profile.objects.create(title="Developer")
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+            company="ABC Company",
+            company_description="A leading software development company",
+            position="Senior Developer",
+            start_date="2022-01-01",
+            responsibility="Worked on various projects using Python and Django",
+            skills="Python, Django, SQL",
+        )
+        self.achievement_data = {
+            "work_experience_id": self.work_experience,
+            "achievement_text": "Developed a high-impact feature for a client project",
+        }
+
+    def test_achievement_creation(self):
+        # Test creating an achievement with all values
+        achievement = Achievement.objects.create(**self.achievement_data)
+
+        self.assertEqual(achievement.work_experience_id, self.work_experience)
+        self.assertEqual(
+            achievement.achievement_text,
+            "Developed a high-impact feature for a client project",
+        )
+
+    def test_achievement_creation_with_only_required_fields(self):
+        # Test creating an achievement with only the required field "work_experience_id"
+        achievement_data = {
+            "work_experience_id": self.work_experience,
+        }
+
+        achievement = Achievement(**achievement_data)
+        achievement.full_clean()
+
+    def test_achievement_text_max_length(self):
+        # Test the maximum length of the achievement_text field
+        achievement_text = "A" * 100  # Exceeds the maximum length of 80 characters
+
+        achievement = Achievement(achievement_text=achievement_text)
+
+        with self.assertRaises(ValidationError):
+            achievement.full_clean()
 
 
 class EducationInformationModelTestCase(TestCase):

@@ -1,8 +1,9 @@
 from django.test import TestCase
-from resume.models import Profile
+from resume.models import Profile, WorkExperience
 from resume.serializers import (
     LanguageSerializer,
     EducationInformationSerializer,
+    AchievementSerializer,
     WorkExperienceSerializer,
     ProfileDescriptionSerializer,
     ContactDataSerializer,
@@ -87,6 +88,54 @@ class EducationInformationSerializerTestCase(TestCase):
         self.assertNotIn("degree", serializer.errors)
         self.assertNotIn("institution", serializer.errors)
         self.assertNotIn("start_date", serializer.errors)
+
+
+class AchievementSerializerTestCase(TestCase):
+    def setUp(self):
+        self.profile = Profile.objects.create(title="Developer")
+        self.work_experience = WorkExperience.objects.create(
+            profile_id=self.profile,
+            company="ABC Company",
+            company_description="A leading software development company",
+            position="Senior Developer",
+            start_date="2022-01-01",
+            end_date="2022-12-31",
+            skills="Python, Django, SQL",
+        )
+
+    def test_achievement_serializer_valid_data(self):
+        achievement_data = {
+            "work_experience_id": self.work_experience.id,
+            "achievement_text": "Developed a new feature that improved performance by 10%",
+        }
+        serializer = AchievementSerializer(data=achievement_data)
+        self.assertTrue(serializer.is_valid())
+
+    def test_achievement_serializer_empty_data(self):
+        achievement_data = {}
+        serializer = AchievementSerializer(data=achievement_data)
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("work_experience_id", serializer.errors)
+        self.assertNotIn("achievement_text", serializer.errors)
+
+    def test_achievement_serializer_max_length(self):
+        achievement_data = {
+            "work_experience_id": self.work_experience.id,
+            "achievement_text": "A"
+            * 100,  # Exceeds the maximum length of 80 characters
+        }
+        serializer = AchievementSerializer(data=achievement_data)
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("achievement_text", serializer.errors)
+
+    def test_achievement_serializer_work_experience_id_exists(self):
+        achievement_data = {
+            "work_experience_id": 100,  # Does not exist
+            "achievement_text": "Developed a new feature that improved performance by 10%",
+        }
+        serializer = AchievementSerializer(data=achievement_data)
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("work_experience_id", serializer.errors)
 
 
 class WorkExperienceSerializerTestCase(TestCase):

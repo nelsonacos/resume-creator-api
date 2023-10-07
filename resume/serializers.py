@@ -4,6 +4,7 @@ from .models import (
     PersonalData,
     ContactData,
     ProfileDescription,
+    Achievement,
     WorkExperience,
     EducationInformation,
     Language,
@@ -11,9 +12,7 @@ from .models import (
 
 
 class LanguageSerializer(serializers.ModelSerializer):
-    profile_id = serializers.PrimaryKeyRelatedField(
-        queryset=Profile.objects.all()
-    )
+    profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
 
     class Meta:
         model = Language
@@ -21,19 +20,26 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 
 class EducationInformationSerializer(serializers.ModelSerializer):
-    profile_id = serializers.PrimaryKeyRelatedField(
-        queryset=Profile.objects.all()
-    )
+    profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
 
     class Meta:
         model = EducationInformation
         fields = "__all__"
 
 
-class WorkExperienceSerializer(serializers.ModelSerializer):
-    profile_id = serializers.PrimaryKeyRelatedField(
-        queryset=Profile.objects.all()
+class AchievementSerializer(serializers.ModelSerializer):
+    work_experience_id = serializers.PrimaryKeyRelatedField(
+        queryset=WorkExperience.objects.all()
     )
+
+    class Meta:
+        model = Achievement
+        fields = "__all__"
+
+
+class WorkExperienceSerializer(serializers.ModelSerializer):
+    profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
+    achievements = AchievementSerializer(many=True, required=False)
 
     class Meta:
         model = WorkExperience
@@ -41,9 +47,7 @@ class WorkExperienceSerializer(serializers.ModelSerializer):
 
 
 class ProfileDescriptionSerializer(serializers.ModelSerializer):
-    profile_id = serializers.PrimaryKeyRelatedField(
-        queryset=Profile.objects.all()
-    )
+    profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
 
     class Meta:
         model = ProfileDescription
@@ -51,9 +55,7 @@ class ProfileDescriptionSerializer(serializers.ModelSerializer):
 
 
 class ContactDataSerializer(serializers.ModelSerializer):
-    profile_id = serializers.PrimaryKeyRelatedField(
-        queryset=Profile.objects.all()
-    )
+    profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
 
     class Meta:
         model = ContactData
@@ -61,9 +63,7 @@ class ContactDataSerializer(serializers.ModelSerializer):
 
 
 class PersonalDataSerializer(serializers.ModelSerializer):
-    profile_id = serializers.PrimaryKeyRelatedField(
-        queryset=Profile.objects.all()
-    )
+    profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
 
     class Meta:
         model = PersonalData

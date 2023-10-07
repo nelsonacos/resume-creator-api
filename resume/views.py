@@ -4,6 +4,7 @@ from .models import (
     PersonalData,
     ContactData,
     ProfileDescription,
+    Achievement,
     WorkExperience,
     EducationInformation,
     Language,
@@ -13,6 +14,7 @@ from .serializers import (
     PersonalDataSerializer,
     ContactDataSerializer,
     ProfileDescriptionSerializer,
+    AchievementSerializer,
     WorkExperienceSerializer,
     EducationInformationSerializer,
     LanguageSerializer,
@@ -37,6 +39,11 @@ class ContactDataViewSet(viewsets.ModelViewSet):
 class ProfileDescriptionViewSet(viewsets.ModelViewSet):
     queryset = ProfileDescription.objects.all()
     serializer_class = ProfileDescriptionSerializer
+
+
+class AchievementViewSet(viewsets.ModelViewSet):
+    queryset = Achievement.objects.all()
+    serializer_class = AchievementSerializer
 
 
 class WorkExperienceViewSet(viewsets.ModelViewSet):

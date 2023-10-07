@@ -7,6 +7,7 @@ from .views import (
     LanguageViewSet,
     EducationInformationViewSet,
     WorkExperienceViewSet,
+    AchievementViewSet,
     ProfileDescriptionViewSet,
     ContactDataViewSet,
     PersonalDataViewSet,
@@ -19,6 +20,7 @@ router.register(r"personal-data", PersonalDataViewSet)
 router.register(r"contact-data", ContactDataViewSet)
 router.register(r"profile-descriptions", ProfileDescriptionViewSet)
 router.register(r"work-experiences", WorkExperienceViewSet)
+router.register(r"achievements", AchievementViewSet)
 router.register(r"education-information", EducationInformationViewSet)
 router.register(r"languages", LanguageViewSet)
 

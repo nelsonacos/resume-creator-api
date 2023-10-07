@@ -43,8 +43,15 @@ class WorkExperience(models.Model):
     position = models.CharField(max_length=100, blank=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    description = models.TextField(blank=True)
-    skills = models.TextField(blank=True)
+    responsibility = models.TextField(blank=True)
+    skills = models.CharField(max_length=200, blank=True)
+
+
+class Achievement(models.Model):
+    work_experience_id = models.ForeignKey(
+        WorkExperience, on_delete=models.CASCADE, related_name="achievements"
+    )
+    achievement_text = models.CharField(max_length=80, blank=True)
 
 
 class EducationInformation(models.Model):
