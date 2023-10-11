@@ -4,3 +4,4 @@ djangorestframework
 coreapi
 Pillow
 python-dotenv
+psycopg2
