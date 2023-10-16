@@ -4,7 +4,6 @@ from .models import (
     PersonalData,
     ContactData,
     ProfileDescription,
-    Achievement,
     WorkExperience,
     EducationInformation,
     Language,
@@ -27,19 +26,14 @@ class EducationInformationSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class AchievementSerializer(serializers.ModelSerializer):
-    work_experience_id = serializers.PrimaryKeyRelatedField(
-        queryset=WorkExperience.objects.all()
-    )
-
-    class Meta:
-        model = Achievement
-        fields = "__all__"
-
-
 class WorkExperienceSerializer(serializers.ModelSerializer):
     profile_id = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
-    achievements = AchievementSerializer(many=True, required=False)
+    achievements = serializers.ListField(
+        child=serializers.CharField(max_length=80), required=False
+    )
+    skills = serializers.ListField(
+        child=serializers.CharField(max_length=20), required=False
+    )
 
     class Meta:
         model = WorkExperience

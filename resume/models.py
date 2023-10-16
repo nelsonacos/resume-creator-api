@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 
 class Profile(models.Model):
@@ -44,14 +45,12 @@ class WorkExperience(models.Model):
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     responsibility = models.TextField(blank=True)
-    skills = models.CharField(max_length=200, blank=True)
-
-
-class Achievement(models.Model):
-    work_experience_id = models.ForeignKey(
-        WorkExperience, on_delete=models.CASCADE, related_name="achievements"
+    achievements = ArrayField(
+        models.CharField(max_length=80, blank=True), null=True, blank=True
     )
-    achievement_text = models.CharField(max_length=80, blank=True)
+    skills = ArrayField(
+        models.CharField(max_length=20, blank=True), null=True, blank=True
+    )
 
 
 class EducationInformation(models.Model):
