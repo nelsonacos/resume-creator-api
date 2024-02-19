@@ -5,3 +5,4 @@ coreapi
 Pillow
 python-dotenv
 psycopg2
+gunicorn
