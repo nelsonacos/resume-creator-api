@@ -7,10 +7,10 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/app
+      - static:/static
     depends_on:
       - db
-    command: bash -c "python manage.py migrate && gunicorn resume_creator_api.wsgi:application -c gunicorn.config.py"
+    command: bash -c "python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn resume_creator_api.wsgi:application -c gunicorn.config.py"
     env_file:
       - .env
 
@@ -24,6 +24,15 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - static:/static
+    depends_on:
+      - web
 
 volumes:
   db_data:
+  static:

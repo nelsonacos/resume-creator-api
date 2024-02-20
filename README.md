@@ -25,7 +25,7 @@
     API for generating resumes easily
     <br />
     <br />
-    <a href="http://localhost:8000/resume/docs/"><strong>Explore the documentation</strong></a>
+    <a href="http://localhost/resume/docs/"><strong>Explore the documentation</strong></a>
     <br />
     <br />
     <a href="#">View Demo</a>
@@ -97,9 +97,9 @@
 ```sh
 docker-compose build && docker-compose up
 ```
-Open http://localhost:8000/resume/api/v1/ with your browser to see the result.
+Open http://localhost/resume/api/v1/ with your browser to see the result.
 
-Visit the documentation http://localhost:8000/resume/docs/
+Visit the documentation http://localhost/resume/docs/
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
