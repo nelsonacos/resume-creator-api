@@ -1,0 +1,176 @@
+[
+    {
+        "model": "resume.Profile",
+        "pk": 1,
+        "fields": {
+            "photo_url": "https://avatars.githubusercontent.com/u/22745030?v=4",
+            "title": "Full Stack Developer"
+        }
+    },
+    {
+        "model": "resume.PersonalData",
+        "pk": 1,
+        "fields": {
+            "profile_id": 1,
+            "first_name": "Nelson",
+            "last_name": "Acosta",
+            "date_of_birth": "1990-01-01",
+            "address": "123 Main St"
+        }
+    },
+    {
+        "model": "resume.ContactData",
+        "pk": 1,
+        "fields": {
+            "profile_id": 1,
+            "phone_number": "123-456-789",
+            "email": "nelson@example.com",
+            "website": "https://example.com",
+            "linkedin": "https://linkedin.com/in/desarrolladorpython",
+            "github": "https://github.com/nelsonacos"
+        }
+    },
+    {
+        "model": "resume.ProfileDescription",
+        "pk": 1,
+        "fields": {
+            "profile_id": 1,
+            "summary": "+4 years as a Developer with experience in modern web applications. Proficient in the node.js ecosystem I have a solid understanding of microservices-based architecture and extensive experience working with Linux systems. I am able to effectively self-manage during independent projects and also collaborate as part of a productive team."
+        }
+    },
+    {
+        "model": "resume.WorkExperience",
+        "pk": 1,
+        "fields": {
+            "profile_id": 1,
+            "company": "Catunga",
+            "company_description": "IT consultant, specialized in web development",
+            "position": "Full Stack Developer",
+            "start_date": "2018-08-01",
+            "end_date": "2024-04-27",
+            "responsibility": "ecommerce automation. As well as proposing suitable solutions to cover the software requirements.",
+            "achievements": [
+                "Automate 80% of sales operations.",
+                "Responsible for the strategy of converting services into products.",
+                "Actively worked to improve the ecommerce conversion rate."
+            ],
+            "skills": [
+                "Node JS",
+                "Typescript",
+                "Javascript",
+                "React",
+                "Next.js",
+                "Jest",
+                "Testing Library",
+                "Maria DB",
+                "Wordpress",
+                "Headless CMS",
+                "Tailwind CSS",
+                "Git",
+                "Aws",
+                "Linux",
+                "Docker"
+            ]
+        }
+    },
+    {
+        "model": "resume.WorkExperience",
+        "pk": 2,
+        "fields": {
+            "profile_id": 1,
+            "company": "Promatic Media",
+            "company_description": "Development of technological solutions",
+            "position": "Software Developer",
+            "start_date": "2018-04-01",
+            "end_date": "2024-07-27",
+            "responsibility": "Develop automation tools",
+            "achievements": [
+                "Design and develop an automated system using Python to manage the city's advertising screen sequences.",
+                "Implement web scraping and data extraction techniques to obtain real-time information from various sources and format them appropriately for display at city bus stops.",
+                "Improve coordination and synchronization of displays across multiple locations, ensuring a consistent and engaging viewing experience for Falabella retail customers."
+            ],
+            "skills": [
+                "Python",
+                "Git",
+                "Linux"
+            ]
+        }
+    },
+    {
+        "model": "resume.WorkExperience",
+        "pk": 3,
+        "fields": {
+            "profile_id": 1,
+            "company": "Konecta Chile",
+            "company_description": "Multinational technological solutions",
+            "position": "Backoffice",
+            "start_date": "2016-11-01",
+            "end_date": "2018-03-27",
+            "responsibility": "Automate Reports and present them to Management.",
+            "achievements": [
+                "Develop modules and tools to reduce the level of work stress of executives.",
+                "Eliminate 50% of executive workload by automating macros in Excel",
+                "Successfully work and present solutions to stakeholders under the direction of my direct supervisor."
+            ],
+            "skills": [
+                "Excel",
+                "Python",
+                "Visual Basic",
+                "Html",
+                "Javascript",
+                "Css",
+                "Git",
+                "Linux"
+            ]
+        }
+    },
+    {
+        "model": "resume.WorkExperience",
+        "pk": 4,
+        "fields": {
+            "profile_id": 1,
+            "company": "Contrato Express",
+            "company_description": "Brazilian startup dedicated to automating legal contracts",
+            "position": "UX Developer",
+            "start_date": "2016-01-01",
+            "end_date": "2016-08-27",
+            "responsibility": "Improve website user experience.",
+            "achievements": [
+                "Worked effectively with the product team to understand site requirements and specifications.",
+                "Implement changes and alterations to the website based on design specifications to improve user experience.",
+                "The dependency on Jquery was completely eliminated."
+            ],
+            "skills": [
+                "Excel",
+                "Python",
+                "Visual Basic",
+                "Html",
+                "Javascript",
+                "Css",
+                "Git",
+                "Linux"
+            ]
+        }
+    },
+    {
+        "model": "resume.EducationInformation",
+        "pk": 1,
+        "fields": {
+            "profile_id": 1,
+            "degree": "Software development",
+            "institution": "Platzi",
+            "start_date": "2017-08-01",
+            "end_date": "2018-08-01",
+            "description": "Higher Online Education"
+        }
+    },
+    {
+        "model": "resume.Language",
+        "pk": 1,
+        "fields": {
+            "profile_id": 1,
+            "name": "Spanish",
+            "proficiency": "N"
+        }
+    }
+]
